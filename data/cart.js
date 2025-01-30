@@ -75,5 +75,4 @@ export function updateDeliveryOption(productsId, deliveryOptionId) {
   })
   iteamMatching.deliveryOptionId = deliveryOptionId
   saveToStorage()
-  console.log(cart)
 }
