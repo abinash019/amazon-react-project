@@ -1,3 +1,6 @@
+import { cart, cartQuantity } from '../data/cart.js';
+import { products } from '../data/products.js';
+
 let productHTML = '';
 
 products.forEach((products) => {
@@ -57,61 +60,40 @@ products.forEach((products) => {
 
 }
 )
-
 document.querySelector('.products-grid')
   .innerHTML = productHTML;
+
+function updateCart() {
+  // let productQuantityNumber = 0;
+  // const productQuantity = document.getElementById('product-quantity-containers')
+  //   .addEventListener('change', () => {
+  //     productQuantityNumber = Number(productQuantity.value)
+  //     console.log(productQuantityNumber)
+  //     document.querySelector('.cart-quantity').innerHTML = productQuantityNumber
+
+
+
+  //   })
+  let productQuantityNumber = 0;
+  cart.forEach((iteam) => {
+
+    productQuantityNumber += iteam.quantity
+  })
+  document.querySelector('.cart-quantity').innerHTML = productQuantityNumber
+
+
+}
+
+
 document.querySelectorAll('.js-added-to-cart-button')
   .forEach((button) => {
     button.addEventListener('click', () => {
       const productsId = button.dataset.productsId;
       console.log(cart)
-
-      let iteamMatching;
-      cart.forEach((iteam) => {
-
-
-        if (productsId === iteam.productsId) {
-          iteamMatching = iteam;
-        }
-      })
-      if (iteamMatching) {
-        iteamMatching.quantity += 1
-        console.log()
-
-      }
-      else {
-        cart.push({
-          productsId: productsId,
-          quantity: 1
-        })
-
-      }
-      let productQuantityNumber = 0;
-      const productQuantity = document.getElementById('product-quantity-containers')
-        .addEventListener('change', () => {
-
-          productQuantityNumber = Number(productQuantity.value)
-          console.log(productQuantityNumber)
-
-        })
-
-
-      cart.forEach((iteam) => {
-
-        productQuantityNumber += iteam.quantity
-
-
-      })
-      document.querySelector('.cart-quantity').innerHTML = productQuantityNumber
-
-
-
-
-
-
-
-
+      cartQuantity(productsId);
+      updateCart();
     })
-
-
   })
+
+
+
